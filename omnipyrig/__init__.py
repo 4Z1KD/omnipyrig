@@ -1,1 +1,1 @@
-from omnipyrig import OmniRigClient
+from omnipyrig import OmniRigWrapper
