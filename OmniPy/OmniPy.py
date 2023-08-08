@@ -74,10 +74,8 @@ class OmniRigClient():
             try:
                 frequency = int(frequency)
                 if vfo_selector.upper() == 'A':
-                    if self.is_debug: print("VFO_A")
                     self._rig.FreqA = frequency
                 elif vfo_selector.upper() == 'B':
-                    if self.is_debug: print("VFO_B")
                     self._rig.FreqB = frequency
             except ValueError:
                 return
