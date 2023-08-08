@@ -50,6 +50,12 @@ class OmniRigWrapper():
     #split
     SPLIT_ON = 0x00008000
     SPLIT_OFF = 0x00010000
+
+    #vfo
+    VFO_AA = 128
+    VFO_AB = 256
+    VFO_BB = 512
+    VFO_BA = 1024
     
 
     #c'tor
@@ -172,19 +178,19 @@ class OmniRigWrapper():
 
     def setVfoA(self):
         time.sleep(self._timeout)
-        self._rig.Vfo = 128
+        self._rig.Vfo = self.VFO_AA
     
     def setVfoB(self):
         time.sleep(self._timeout)
-        self._rig.Vfo = 512
+        self._rig.Vfo = self.VFO_BB
     
     def setVfoAB(self):
         time.sleep(self._timeout)
-        self._rig.Vfo = 256
+        self._rig.Vfo = self.VFO_AB
     
     def setVfoBA(self):
         time.sleep(self._timeout)
-        self._rig.Vfo = 1024
+        self._rig.Vfo = self.VFO_BA
 
     def setActiveRig(self, index):
         if index == 1:

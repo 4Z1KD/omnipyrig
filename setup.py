@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.0.1'
+VERSION = '1.0.1'
 DESCRIPTION = 'A python wrapper for Omni-Rig'
 LONG_DESCRIPTION = 'A package that allows the deveplopment of amateur radio applications using the amazing Omni-Rig library'
 
