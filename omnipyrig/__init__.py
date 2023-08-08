@@ -1,0 +1,1 @@
+from omnipyrig import OmniRigClient

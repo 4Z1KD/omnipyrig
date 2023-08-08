@@ -6,7 +6,7 @@ LONG_DESCRIPTION = 'A package that allows the deveplopment of amateur radio appl
 
 # Setting up
 setup(
-    name="omnipy",
+    name="omnipyrig",
     version=VERSION,
     author="4Z1KD (Gil)",
     author_email="<4z1kd@iarc.org>",
