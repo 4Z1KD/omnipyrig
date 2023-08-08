@@ -1,2 +1,2 @@
-# omni[py]rig
+# omnipyrig
 A python wrapper for the amazing OmniRig 🍄
