@@ -1,6 +1,6 @@
-# omnipyrig 🍄
+# omnipyrig 📻
 
-A python wrapper for the amazing OmniRig 📻
+A package that allows the deveplopment of amateur radio applications using the amazing Omni-Rig library
 
 # prerequisite 🖐️
 1. OmniRig (http://dxatlas.com/omnirig/)
