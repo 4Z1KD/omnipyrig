@@ -9,7 +9,7 @@ A python wrapper for the amazing OmniRig 📻
 # Installation 🛠
 PyPi:<br>
 https://pypi.org/project/omnipyrig/<br>
-pip install omnipyrig 🧰
+pip install omnipyrig
 
 
 # usage 🚀
@@ -25,8 +25,8 @@ client.showParams()
 the package uses win32com to dispatch omnirig object<br/>
 it then wrap it's properties and methods<br/>
 
-constants:</br>
-* mode enumeration
+## constants:</br>
+***mode enumeration***
 - MODE_SSB_L
 - MODE_SSB_U
 - MODE_CW_U
@@ -43,23 +43,23 @@ constants:</br>
 - MODE_PSK
 - MODE_DATA_FM_N
 
-* rit/xit
+***rit/xit***
 - RIT_ON
 - RIT_OFF
 - XIT_ON
 - XIT_OFF
 
-* split
+***split***
 - SPLIT_ON
 - SPLIT_OFF
 
-* vfo
+***vfo***
 - VFO_AA
 - VFO_AB
 - VFO_BB
 - VFO_BA
 
-methods:
+## methods:
 - client.showParams()
 - client.setFrequency(vfo_selector, frequency)
 - client.setMode(mode)
