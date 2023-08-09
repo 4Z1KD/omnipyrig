@@ -1,18 +1,18 @@
-# omnipyrig 📻
+# omnipyrig
 
 A package that allows the deveplopment of amateur radio applications using the amazing Omni-Rig library
 
-# prerequisite 🖐️
+# prerequisite
 1. OmniRig (http://dxatlas.com/omnirig/)
 2. python (https://www.python.org/downloads/)
 
-# Installation 🛠
+# Installation
 PyPi:<br>
 https://pypi.org/project/omnipyrig/<br>
 pip install omnipyrig
 
 
-# usage 🚀
+# usage
 ```
 
 import omnipyrig
@@ -21,7 +21,7 @@ client.showParams()
 
 ```
 
-# how it works? 🐜
+# how it works? 
 the package uses win32com to dispatch omnirig object<br/>
 it then wrap it's properties and methods<br/>
 

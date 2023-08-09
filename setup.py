@@ -1,8 +1,12 @@
 from setuptools import setup, find_packages
 
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 DESCRIPTION = 'A python wrapper for Omni-Rig'
-LONG_DESCRIPTION = 'A package that allows the deveplopment of amateur radio applications using the amazing Omni-Rig library'
+
+# read the contents of your README file
+from pathlib import Path
+this_directory = Path(__file__).parent
+LONG_DESCRIPTION = (this_directory / "README.md").read_text()
 
 # Setting up
 setup(
