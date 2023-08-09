@@ -17,9 +17,8 @@ setup(
     install_requires=['pywin32'],
     keywords=['python', 'amateur radio', 'ham', 'omni-rig', 'omnirig', 'radio'],
     classifiers=[
-        "Development Status :: Release",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
-        "Intended Audience :: Amateur Radio Operators",
         "Programming Language :: Python :: 3",
         "Operating System :: Microsoft :: Windows",
     ]
