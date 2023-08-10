@@ -240,7 +240,7 @@ class OmniRigWrapper():
         elif param =='Xit': print(f'Xit: {self._rig.Xit}')
         time.sleep(self._timeout)
 
-    def safe_int(input_data):
+    def safe_int(self, input_data):
         if isinstance(input_data, str):
             try:
                 return int(input_data.replace(".", ""))  # Remove decimal point
