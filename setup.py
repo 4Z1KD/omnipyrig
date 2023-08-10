@@ -1,6 +1,8 @@
 from setuptools import setup, find_packages
-
-VERSION = '1.0.0'
+major = 0
+minor = 0
+build = 5
+VERSION = f'{major}.{minor}.{build}'
 DESCRIPTION = 'A python wrapper for Omni-Rig'
 
 # read the contents of your README file
@@ -17,6 +19,7 @@ setup(
     description=DESCRIPTION,
     long_description_content_type="text/markdown",
     long_description=LONG_DESCRIPTION,
+    project_urls= {"github":"https://github.com/4Z1KD/omnipyrig"},
     packages=find_packages(),
     install_requires=['pywin32'],
     keywords=['python', 'amateur radio', 'ham', 'omni-rig', 'omnirig', 'radio'],
