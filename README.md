@@ -17,14 +17,12 @@ pip install omnipyrig
 
 import omnipyrig
 
-#create an instance
-client = omnipyrig.OmniRigWrapper()
-
-#print the current state
-client.showParams()
-
-#set the frequency of vfo A
-client.setFrequency('A', 14230000)
+#create a new instance
+OmniClient = omnipyrig.OmniRigWrapper()
+#set the frequency
+OmniClient.setFrequency("A",14222000)
+#set the mode
+OmniClient.setMode(OmniClient.MODE_SSB_U)
 
 ```
 
