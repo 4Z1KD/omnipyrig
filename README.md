@@ -16,14 +16,23 @@ pip install omnipyrig
 ```
 
 import omnipyrig
-client = OmniRigWrapper()
+
+#create an instance
+client = omnipyrig.OmniRigWrapper()
+
+#print the current state
 client.showParams()
+
+#set the frequency of vfo A
+client.setFrequency('A', 14230000)
 
 ```
 
 # how it works? 
 the package uses win32com to dispatch omnirig object<br/>
 it then wrap it's properties and methods<br/>
+
+# constants & methods
 
 ## constants:</br>
 ***mode enumeration***
