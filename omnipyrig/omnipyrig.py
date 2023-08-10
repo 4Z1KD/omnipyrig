@@ -75,106 +75,77 @@ class OmniRigWrapper():
         
     def setFrequency(self, vfo_selector, frequency):
         time.sleep(self._timeout)
-        frequency = frequency.strip()
-        if frequency:
-            try:
-                frequency = int(frequency)
-                if vfo_selector.upper() == 'A':
-                    self._rig.FreqA = frequency
-                elif vfo_selector.upper() == 'B':
-                    self._rig.FreqB = frequency
-            except ValueError:
-                return
+        frequency = self.safe_int(frequency)
+        if (frequency):
+            if vfo_selector.upper() == 'A':
+                self._rig.FreqA = frequency
+            elif vfo_selector.upper() == 'B':
+                self._rig.FreqB = frequency
     
     def setMode(self, mode):
         time.sleep(self._timeout)
-        mode = mode.strip()
-        if mode:
-            try:
-                mode = int(mode)
-                if mode == self.MODE_CW_L:
-                    self._rig.Mode = self.CW_L
-                elif mode == self.MODE_CW_U:
-                    self._rig.Mode = self.CW_U
-                elif mode == self.MODE_SSB_L:
-                    self._rig.Mode = self.SSB_L
-                elif mode == self.MODE_SSB_U:
-                    self._rig.Mode = self.SSB_U
-                elif mode == self.MODE_DATA_L:
-                    self._rig.Mode = self.DATA_L
-                elif mode == self.MODE_DATA_U:
-                    self._rig.Mode = self.DATA_U
-                elif mode == self.MODE_FM:
-                    self._rig.Mode = self.FM
-                elif mode == self.MODE_AM:
-                    self._rig.Mode = self.AM
-            except ValueError:
-                return
+        mode = self.safe_int(mode)
+        if (mode):
+            if mode == self.MODE_CW_L:
+                self._rig.Mode = self.CW_L
+            elif mode == self.MODE_CW_U:
+                self._rig.Mode = self.CW_U
+            elif mode == self.MODE_SSB_L:
+                self._rig.Mode = self.SSB_L
+            elif mode == self.MODE_SSB_U:
+                self._rig.Mode = self.SSB_U
+            elif mode == self.MODE_DATA_L:
+                self._rig.Mode = self.DATA_L
+            elif mode == self.MODE_DATA_U:
+                self._rig.Mode = self.DATA_U
+            elif mode == self.MODE_FM:
+                self._rig.Mode = self.FM
+            elif mode == self.MODE_AM:
+                self._rig.Mode = self.AM
                 
     def setRit(self,state):
         time.sleep(self._timeout)
-        state = state.strip()
-        if state:
-            try:
-                state = int(state)
-                if state == self.ON:
-                    self._rig.Rit = self.RIT_ON
-                if state == self.OFF:
-                    self._rig.Rit = self.RIT_OFF
-            except ValueError:
-                return
+        state = self.safe_int(state)
+        if (state):
+            if state == self.ON:
+                self._rig.Rit = self.RIT_ON
+            if state == self.OFF:
+                self._rig.Rit = self.RIT_OFF
 
     def setXit(self,state):
         time.sleep(self._timeout)
-        state = state.strip()
-        if state:
-            try:
-                state = int(state)
-                if state == self.ON:
-                    self._rig.Xit = self.XIT_ON
-                if state == self.OFF:
-                    self._rig.Xit = self.XIT_OFF
-            except ValueError:
-                return
+        state = self.safe_int(state)
+        if (state):
+            if state == self.ON:
+                self._rig.Xit = self.XIT_ON
+            if state == self.OFF:
+                self._rig.Xit = self.XIT_OFF
 
     def setRitOffset(self, offset):
         time.sleep(self._timeout)
-        offset = offset.strip()
-        if offset:
-            try:
-                offset = int(offset)
-                self._rig.ClearRit()
-                self._rig.RitOffset = offset
-            except ValueError:
-                return
+        offset = self.safe_int(offset)
+        if (offset):
+            self._rig.ClearRit()
+            self._rig.RitOffset = offset
     
     def setSplit(self,state):
         time.sleep(self._timeout)
-        if not isinstance(state, int):
-            state = state.strip()
-            if state:
-                try:
-                    state = int(state)
-                except ValueError:
-                    return
-        if state == self.ON:
-            #self._rig.SetSplitMode()
-            self._rig.Split = self.SPLIT_ON
-        if state == self.OFF:
-            #self._rig.SetSimplexMode()
-            self._rig.Split = self.SPLIT_OFF
+        state = self.safe_int(state)
+        if (state):
+            if state == self.ON:
+                #self._rig.SetSplitMode()
+                self._rig.Split = self.SPLIT_ON
+            if state == self.OFF:
+                #self._rig.SetSimplexMode()
+                self._rig.Split = self.SPLIT_OFF
 
     def setPitch(self, pitch):
             time.sleep(self._timeout)
-            pitch = pitch.strip()
-            if pitch:
-                try:
-                    pitch = int(pitch)
-                    pitch = int(pitch/10)
-                    pitch = int(pitch*10)
-                    self._rig.Pitch = pitch
-                except ValueError:
-                    return
+            pitch = self.safe_int(pitch)
+            if (pitch):
+                pitch = int(pitch/10)
+                pitch = int(pitch*10)
+                self._rig.Pitch = pitch
 
     def setVfoA(self):
         time.sleep(self._timeout)
@@ -269,29 +240,42 @@ class OmniRigWrapper():
         elif param =='Xit': print(f'Xit: {self._rig.Xit}')
         time.sleep(self._timeout)
 
+    def safe_int(input_data):
+        if isinstance(input_data, str):
+            try:
+                return int(input_data.replace(".", ""))  # Remove decimal point
+            except ValueError:
+                return None  # Return None if the string cannot be converted
+        elif isinstance(input_data, (int, float)):
+            if isinstance(input_data, float):
+                input_data = str(input_data).replace(".", "")  # Remove decimal point
+            return int(input_data)
+        else:
+            return None  # Return None for other types
+        
 ############################ main #######################################
 if __name__ == "__main__":
     client = OmniRigWrapper()
     client.showParams()
-    #client.showParam("StatusStr")
-    #client.showParam("ClearRit")
-    #client.showParam("Freq")
-    #client.showParam("FreqA")
-    #client.showParam("FreqB")
-    #client.showParam("FrequencyOfTone")
-    #client.showParam("GetRxFrequency")
-    #client.showParam("GetTxFrequency")
-    #client.showParam("IsParamReadable")
-    #client.showParam("Mode")
-    #client.showParam("Pitch")
-    #client.showParam("PortBits")
-    #client.showParam("ReadableParams")
-    #client.showParam("RigType")
-    #client.showParam("Rit")
-    #client.showParam("RitOffset")
-    #client.showParam("Split")
-    #client.showParam("Status")
-    #client.showParam("Tx")
-    #client.showParam("Vfo")
-    #client.showParam("WriteableParams")
-    #client.showParam("Xit")
+    client.showParam("StatusStr")
+    client.showParam("ClearRit")
+    client.showParam("Freq")
+    client.showParam("FreqA")
+    client.showParam("FreqB")
+    client.showParam("FrequencyOfTone")
+    client.showParam("GetRxFrequency")
+    client.showParam("GetTxFrequency")
+    client.showParam("IsParamReadable")
+    client.showParam("Mode")
+    client.showParam("Pitch")
+    client.showParam("PortBits")
+    client.showParam("ReadableParams")
+    client.showParam("RigType")
+    client.showParam("Rit")
+    client.showParam("RitOffset")
+    client.showParam("Split")
+    client.showParam("Status")
+    client.showParam("Tx")
+    client.showParam("Vfo")
+    client.showParam("WriteableParams")
+    client.showParam("Xit")
