@@ -6,7 +6,7 @@ A package that allows the deveplopment of amateur radio applications using the a
 1. OmniRig (http://dxatlas.com/omnirig/)
 2. python (https://www.python.org/downloads/)
 
-# Installation
+# installation
 PyPi:<br>
 https://pypi.org/project/omnipyrig/<br>
 pip install omnipyrig
