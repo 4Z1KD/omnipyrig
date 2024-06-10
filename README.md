@@ -6,7 +6,7 @@ A package that allows the deveplopment of amateur radio applications using the a
 1. OmniRig (http://dxatlas.com/omnirig/)
 2. python (https://www.python.org/downloads/)
 
-# Installation
+# installation
 PyPi:<br>
 https://pypi.org/project/omnipyrig/<br>
 pip install omnipyrig
@@ -17,14 +17,12 @@ pip install omnipyrig
 
 import omnipyrig
 
-#create an instance
-client = omnipyrig.OmniRigWrapper()
-
-#print the current state
-client.showParams()
-
-#set the frequency of vfo A
-client.setFrequency('A', 14230000)
+#create a new instance
+OmniClient = omnipyrig.OmniRigWrapper()
+#set the frequency
+OmniClient.setFrequency("A",14222000)
+#set the mode
+OmniClient.setMode(OmniClient.MODE_SSB_U)
 
 ```
 
