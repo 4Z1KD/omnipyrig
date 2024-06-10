@@ -8,7 +8,7 @@ class OmniRigWrapper():
     _rig = None
     _rig1 = None
     _rig2 = None
-    _timeout = 0.2
+    _timeout = 0.5
 
     #on/off enumeration
     OFF = 0
@@ -66,7 +66,7 @@ class OmniRigWrapper():
 
         #set default Rig
         self._rig = self._rig1 = self._omnirig.Rig1
-        self.rig2 = self._omnirig.Rig2
+        self._rig2 = self._omnirig.Rig2
 
         #set a delay
         time.sleep(self._timeout)
@@ -75,7 +75,6 @@ class OmniRigWrapper():
         
     def setFrequency(self, vfo_selector, frequency):
         time.sleep(self._timeout)
-        frequency = self.safe_int(frequency)
         if (frequency):
             if vfo_selector.upper() == 'A':
                 self._rig.FreqA = frequency
@@ -140,12 +139,12 @@ class OmniRigWrapper():
                 self._rig.Split = self.SPLIT_OFF
 
     def setPitch(self, pitch):
-            time.sleep(self._timeout)
-            pitch = self.safe_int(pitch)
-            if (pitch):
-                pitch = int(pitch/10)
-                pitch = int(pitch*10)
-                self._rig.Pitch = pitch
+        time.sleep(self._timeout)
+        pitch = self.safe_int(pitch)
+        if (pitch):
+            pitch = int(pitch/10)
+            pitch = int(pitch*10)
+            self._rig.Pitch = pitch
 
     def setVfoA(self):
         time.sleep(self._timeout)
@@ -164,10 +163,13 @@ class OmniRigWrapper():
         self._rig.Vfo = self.VFO_BA
 
     def setActiveRig(self, index):
-        if index == 1:
-            self._rig = self._rig1
-        elif index == 2:
-            self._rig = self._rig2
+        time.sleep(self._timeout)
+        index = self.safe_int(index)
+        if (index):
+            if index == 1:
+                self._rig = self._rig1
+            elif index == 2:
+                self._rig = self._rig2
     
 ############################ helpers ##############################
     def parseCommand(self, command_string):
@@ -212,35 +214,31 @@ class OmniRigWrapper():
         print(dir(self._rig))
         time.sleep(self._timeout)
 
-    def showParam(self, param):
+    def getParam(self, param):
         time.sleep(self._timeout)
-        if param =='Freq': print(f'Freq: {self._rig.Freq}')
-        elif param =='FreqA': print(f'FreqA: {self._rig.FreqA}')
-        elif param =='FreqB': print(f'FreqB: {self._rig.FreqB}')
-        elif param =='FrequencyOfTone': print(f'FrequencyOfTone: {self._rig.FrequencyOfTone(0)}')
-        elif param =='GetRxFrequency': print(f'GetRxFrequency: {self._rig.GetRxFrequency()}')
-        elif param =='GetTxFrequency': print(f'GetTxFrequency: {self._rig.GetTxFrequency()}')
-        elif param =='Mode': print(f'Mode: {hex(self._rig.Mode)}')
-        elif param =='Pitch': print(f'Pitch: {self._rig.Pitch}')
-        elif param =='PortBits': 
-            print(f'PortBits.Cts: {self._rig.PortBits.Cts}')
-            print(f'PortBits.Dsr: {self._rig.PortBits.Dsr}')
-            print(f'PortBits.Dtr: {self._rig.PortBits.Dtr}')
-            print(f'PortBits.Rts: {self._rig.PortBits.Rts}')
-        elif param =='ReadableParams': print(f'ReadableParams: {self._rig.ReadableParams}')
-        elif param =='RigType': print(f'RigType: {self._rig.RigType}')
-        elif param =='Rit': print(f'Rit: {self._rig.Rit}')
-        elif param =='RitOffset': print(f'RitOffset: {self._rig.RitOffset}')
-        elif param =='Split': print(f'Split: {self._rig.Split}')
-        elif param =='Status': print(f'Status: {self._rig.Status}')
-        elif param =='StatusStr': print(f'StatusStr: {self._rig.StatusStr}')
-        elif param =='Tx': print(f'Tx: {self._rig.Tx}')
-        elif param =='Vfo': print(f'Vfo: {self._rig.Vfo}')
-        elif param =='WriteableParams': print(f'WriteableParams: {self._rig.WriteableParams}')
-        elif param =='Xit': print(f'Xit: {self._rig.Xit}')
+        if param =='Freq': return self._rig.Freq
+        elif param =='FreqA': return self._rig.FreqA
+        elif param =='FreqB': return self._rig.FreqB
+        elif param =='FrequencyOfTone': return self._rig.FrequencyOfTone(0)
+        elif param =='GetRxFrequency': return self._rig.GetRxFrequency()
+        elif param =='GetTxFrequency': return self._rig.GetTxFrequency()
+        elif param =='Mode': return hex(self._rig.Mode)
+        elif param =='Pitch': return self._rig.Pitch
+        elif param =='PortBits': return self._rig.PortBits.Cts, self._rig.PortBits.Dsr,self._rig.PortBits.Dtr,self._rig.PortBits.Rts
+        elif param =='ReadableParams': return self._rig.ReadableParams
+        elif param =='RigType': return self._rig.RigType
+        elif param =='Rit': return self._rig.Rit
+        elif param =='RitOffset': return self._rig.RitOffset
+        elif param =='Split': return self._rig.Split
+        elif param =='Status': return self._rig.Status
+        elif param =='StatusStr': return self._rig.StatusStr
+        elif param =='Tx': return self._rig.Tx
+        elif param =='Vfo': return self._rig.Vfo
+        elif param =='WriteableParams': return self._rig.WriteableParams
+        elif param =='Xit': return self._rig.Xit
         time.sleep(self._timeout)
 
-    def safe_int(input_data):
+    def safe_int(self, input_data):
         if isinstance(input_data, str):
             try:
                 return int(input_data.replace(".", ""))  # Remove decimal point
@@ -256,26 +254,51 @@ class OmniRigWrapper():
 ############################ main #######################################
 if __name__ == "__main__":
     client = OmniRigWrapper()
-    client.showParams()
-    client.showParam("StatusStr")
-    client.showParam("ClearRit")
-    client.showParam("Freq")
-    client.showParam("FreqA")
-    client.showParam("FreqB")
-    client.showParam("FrequencyOfTone")
-    client.showParam("GetRxFrequency")
-    client.showParam("GetTxFrequency")
-    client.showParam("IsParamReadable")
-    client.showParam("Mode")
-    client.showParam("Pitch")
-    client.showParam("PortBits")
-    client.showParam("ReadableParams")
-    client.showParam("RigType")
-    client.showParam("Rit")
-    client.showParam("RitOffset")
-    client.showParam("Split")
-    client.showParam("Status")
-    client.showParam("Tx")
-    client.showParam("Vfo")
-    client.showParam("WriteableParams")
-    client.showParam("Xit")
+    
+    client.setActiveRig(2)
+    client.setFrequency("A",14255000)
+
+    StatusStr = client.getParam("StatusStr")
+    print(StatusStr)
+    ClearRit = client.getParam("ClearRit")
+    print(ClearRit)
+    Freq = client.getParam("Freq")
+    print(Freq)
+    FreqA = client.getParam("FreqA")
+    print(FreqA)
+    FreqB = client.getParam("FreqB")
+    print(FreqB)
+    FrequencyOfTone = client.getParam("FrequencyOfTone")
+    print(FrequencyOfTone)
+    GetRxFrequency = client.getParam("GetRxFrequency")
+    print(GetRxFrequency)
+    GetTxFrequency = client.getParam("GetTxFrequency")
+    print(GetTxFrequency)
+    IsParamReadable = client.getParam("IsParamReadable")
+    print(IsParamReadable)
+    Mode = client.getParam("Mode")
+    print(Mode)
+    Pitch = client.getParam("Pitch")
+    print(Pitch)
+    cts,dsr,dtr,rts = client.getParam("PortBits")
+    print(f'{cts},{dsr},{dtr},{rts}')
+    ReadableParams = client.getParam("ReadableParams")
+    print(ReadableParams)
+    RigType = client.getParam("RigType")
+    print(RigType)
+    Rit = client.getParam("Rit")
+    print(Rit)
+    RitOffset = client.getParam("RitOffset")
+    print(RitOffset)
+    Split = client.getParam("Split")
+    print(Split)
+    Status = client.getParam("Status")
+    print(Status)
+    Tx = client.getParam("Tx")
+    print(Tx)
+    Vfo = client.getParam("Vfo")
+    print(Vfo)
+    WriteableParams = client.getParam("WriteableParams")
+    print(WriteableParams)
+    Xit = client.getParam("Xit")
+    print(Xit)
