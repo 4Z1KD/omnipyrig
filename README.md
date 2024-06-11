@@ -31,9 +31,9 @@ OmniClient.setActiveRig(2)
 RigType = OmniClient.getParam("RigType")
 print(f'Rig 2: {RigType}')
 
-#There are 2 ways to send set commands
+#there are 2 ways to send set commands
 #1. using the explicit methods
-#2. using the generic set method, passing a 2-Letter identifier and a value
+#2. using the generic set method, passing a 2-Letters identifier and a value
 
 #set the frequency of VFO A to 14.255MHz using the explicit setFrequency(...) method
 OmniClient.setFrequency("A",14255000)
@@ -44,20 +44,36 @@ OmniClient.setMode(OmniClient.MODE_SSB_U)
 #set frequency of VFO B to 7.130MHz using the generic set method
 OmniClient.set("FB07130000")
 
-#here is the full list of methods:
+#here is the full list of explicit set methods:
+'''
+setFrequency(vfo_selector, frequency)
+setMode(mode)
+setRit(state)
+setXit(state)
+setRitOffset(offset)
+setSplit(state)
+setPitch(pitch)
+setVfoA()
+setVfoB()
+setVfoAB()
+setVfoBA()
+setActiveRig(index)
+'''
 
-#setFrequency(vfo_selector, frequency)
-#setMode(mode)
-#setRit(state)
-#setXit(state)
-#setRitOffset(offset)
-#setSplit(state)
-#setPitch(pitch)
-#setVfoA()
-#setVfoB()
-#setVfoAB()
-#setVfoBA()
-#setActiveRig(index)
+#here is the full list of 2-Letters command identifiers for the generic set command:
+'''
+'FA########' - sets frequency to VFO A (# is the frequency in Hz)
+'FB########' - sets frequency to VFO B (# is the frequency in Hz)
+'MD##' - sets the mode (# is value of the mode identifier [not to confuse with the mode enum])
+'RT##' - sets the Rit (# is value of the rit enum)
+'XT##' - sets the Xit (# is value of the xit enum)
+'RU####' - set the Rit Offset (# is frequency offset in Hz)
+'KP####' - set the Pitch (# is frequency offset in Hz)
+'AA' - set the VFO to A
+'BB' - set the VFO to B
+'AB' - set the Reciever to VFOA and transmitter to VFOB
+'BA' - set the Reciever to VFOB and transmitter to VFOA
+'''
 
 #get and print some parameters from the radio
 StatusStr = OmniClient.getParam("StatusStr")
@@ -107,40 +123,50 @@ print(Xit)
 ```
 
 # how it works? 
-the package uses win32com to dispatch omnirig object<br/>
-it then wrap it's properties and methods<br/>
+the package uses win32com to dispatch an omnirig object<br/>
+it then wraps it's properties and methods<br/>
 
 # constants & methods
 
 ## constants:</br>
 ***mode enumeration***
-- MODE_SSB_L
-- MODE_SSB_U
-- MODE_CW_U
-- MODE_FM
-- MODE_AM
-- MODE_RTTY_L
-- MODE_CW_L
-- MODE_DATA_L
-- MODE_RTTY_U
-- MODE_DATA_FM
-- MODE_FM_N
-- MODE_DATA_U
-- MODE_AM_N
-- MODE_PSK
-- MODE_DATA_FM_N
+- MODE_SSB_L = 1
+- MODE_SSB_U = 2
+- MODE_CW_U = 3
+- MODE_FM = 4
+- MODE_AM = 5
+- MODE_RTTY_L = 6
+- MODE_CW_L = 7
+- MODE_DATA_L = 8
+- MODE_RTTY_U = 9
+- MODE_DATA_FM = 10
+- MODE_FM_N = 11
+- MODE_DATA_U = 12
+- MODE_AM_N = 13
+- MODE_PSK = 14
+- MODE_DATA_FM_N = 15
 
-***rit/xit***
+***mode identifier***
+- SSB_L = 0x04000000
+- SSB_U = 0x02000000
+- CW_U = 0x00800000
+- FM = 0x40000000
+- AM = 0x20000000
+- CW_L = 0x01000000
+- DATA_L = 0x10000000
+- DATA_U = 0x08000000
+
+***rit/xit enumeration***
 - RIT_ON
 - RIT_OFF
 - XIT_ON
 - XIT_OFF
 
-***split***
+***split enumeration***
 - SPLIT_ON
 - SPLIT_OFF
 
-***vfo***
+***vfo enumeration***
 - VFO_AA
 - VFO_AB
 - VFO_BB
