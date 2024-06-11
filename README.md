@@ -11,14 +11,15 @@ PyPi:<br>
 https://pypi.org/project/omnipyrig/<br>
 pip install omnipyrig<br>
 <br>
-if you need to update:
+if you need to update:<br>
 pip install omnipyrig -U<br>
 
 # usage
 ```
+import omnipyrig
 
 #create a new instance
-OmniClient = OmniRigWrapper()
+OmniClient = omnipyrig.OmniRigWrapper()
 
 #set the active rig to 1 (as defined in OmniRig GUI)
 OmniClient.setActiveRig(1)
@@ -103,7 +104,6 @@ WriteableParams = OmniClient.getParam("WriteableParams")
 print(WriteableParams)
 Xit = OmniClient.getParam("Xit")
 print(Xit)
-
 ```
 
 # how it works? 
