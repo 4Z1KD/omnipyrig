@@ -3,25 +3,45 @@ import omnipyrig
 #create a new instance
 OmniClient = omnipyrig.OmniRigWrapper()
 
-'''
+#set the active rig to 1 (as defined in OmniRig GUI)
 OmniClient.setActiveRig(1)
 RigType = OmniClient.getParam("RigType")
 print(f'Rig 1: {RigType}')
-'''
 
+#set the active rig to 2 (as defined in OmniRig GUI)
 OmniClient.setActiveRig(2)
 RigType = OmniClient.getParam("RigType")
 print(f'Rig 2: {RigType}')
 
-OmniClient.setFrequency("A",14255000)
-OmniClient.setMode(OmniClient.MODE_SSB_U)
-OmniClient.setRitOffset(50)
-OmniClient.setRit(OmniClient.RIT_ON)
-#OmniClient.setXit(OmniClient.XIT_OFF)
-OmniClient.setSplit(OmniClient.SPLIT_OFF)
-OmniClient.setVfoA()
+#There are 2 ways to send set commands
+#1. using the explicit methods
+#2. using the generic set method, passing a 2-Letter identifier and a value
 
-'''
+#set the frequency of VFO A to 14.255MHz using the explicit setFrequency(...) method
+OmniClient.setFrequency("A",14255000)
+
+#set the mode to USB using the explicit setMode(...) method
+OmniClient.setMode(OmniClient.MODE_SSB_U)
+
+#set frequency of VFO B to 7.130MHz using the generic set method
+OmniClient.set("FB07130000")
+
+#here is the full list of methods:
+
+#setFrequency(vfo_selector, frequency)
+#setMode(mode)
+#setRit(state)
+#setXit(state)
+#setRitOffset(offset)
+#setSplit(state)
+#setPitch(pitch)
+#setVfoA()
+#setVfoB()
+#setVfoAB()
+#setVfoBA()
+#setActiveRig(index)
+
+#get and print some parameters from the radio
 StatusStr = OmniClient.getParam("StatusStr")
 print(StatusStr)
 ClearRit = OmniClient.getParam("ClearRit")
@@ -66,4 +86,3 @@ WriteableParams = OmniClient.getParam("WriteableParams")
 print(WriteableParams)
 Xit = OmniClient.getParam("Xit")
 print(Xit)
-'''
