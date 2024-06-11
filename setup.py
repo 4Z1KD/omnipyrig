@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 major = 0
 minor = 0
-build = 13
+build = 14
 VERSION = f'{major}.{minor}.{build}'
 DESCRIPTION = 'A python wrapper for Omni-Rig'
 

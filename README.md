@@ -15,7 +15,7 @@ if you need to update:<br>
 pip install omnipyrig -U<br>
 
 # usage
-```
+```python
 import omnipyrig
 
 #create a new instance
