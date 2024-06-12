@@ -7,12 +7,16 @@ A package that allows the deveplopment of amateur radio applications using the a
 2. python (https://www.python.org/downloads/)
 
 # installation
-PyPi:<br>
+**PyPi:**<br>
 https://pypi.org/project/omnipyrig/<br>
 pip install omnipyrig<br>
 <br>
 if you need to update:<br>
 pip install omnipyrig -U<br>
+
+# source code
+**github:**<br>
+https://github.com/4Z1KD/omnipyrig<br>
 
 # usage
 ```python
@@ -187,5 +191,6 @@ it then wraps it's properties and methods<br/>
 - setVfoBA()
 
 
-73,<br/>
-Gil 4Z1KD
+73,<br>
+Gil 4Z1KD<br>
+4z1kd@iarc.org
