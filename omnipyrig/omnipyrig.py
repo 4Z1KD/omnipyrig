@@ -171,6 +171,10 @@ class OmniRigWrapper():
             elif index == 2:
                 self._rig = self._rig2
     
+    def setCustomCommand(self, command_string, reply_length, reply_end):
+        time.sleep(self._timeout)
+        self._rig.SendCustomCommand(command_string, reply_length, reply_end)
+    
 ############################ helpers ##############################
     def set(self, command_string):
         cmd, val = self.split_string(command_string)
@@ -268,18 +272,22 @@ if __name__ == "__main__":
     RigType = OmniClient.getParam("RigType")
     print(f'Rig 2: {RigType}')
 
-    #There are 2 ways to send set commands
+    #There are 3 ways to send set commands
     #1. using the explicit methods
-    #2. using the generic set method, passing a 2-Letter identifier and a value
-    
+    #2. using the semi-generic set method, passing a 2-Letter identifier and a value
+    #3. using the generic setCustomCommand method, passing the command string
+
     #set the frequency of VFO A to 14.255MHz using the explicit setFrequency(...) method
     OmniClient.setFrequency("A",14255000)
 
     #set the mode to USB using the explicit setMode(...) method
     OmniClient.setMode(OmniClient.MODE_SSB_U)
 
-    #set frequency of VFO B to 7.130MHz using the generic set method
+    #set frequency of VFO B to 7.130MHz using the semi-generic set method
     OmniClient.set("FB07130000")
+
+    #set frequency of VFO A to 18.110MHz using the generic set method
+    OmniClient.setCustomCommand("FA018110000;", 0, 0)
 
     #here is the full list of methods:
     
