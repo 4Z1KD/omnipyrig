@@ -52,6 +52,11 @@ OmniClient.set("FB07130000")
 #set frequency of VFO A to 18.110MHz using the generic set method
 OmniClient.setCustomCommand("FA018110000;", 0, 0)
 
+#put the radio in TX mode
+#OmniClient.setTx()
+#put the radio in RX mode
+#OmniClient.setRx()
+
 #here is the full list of explicit set methods:
 '''
 setFrequency(vfo_selector, frequency)
@@ -65,6 +70,8 @@ setVfoA()
 setVfoB()
 setVfoAB()
 setVfoBA()
+setTx()
+setRx()
 setActiveRig(index)
 '''
 
@@ -164,6 +171,10 @@ it then wraps it's properties and methods<br/>
 - DATA_L = 0x10000000
 - DATA_U = 0x08000000
 
+***tx/rx identifier***
+- TX_OFF = 0x00200000
+- TX_ON 0x00400000
+
 ***rit/xit enumeration***
 - RIT_ON
 - RIT_OFF
@@ -193,6 +204,9 @@ it then wraps it's properties and methods<br/>
 - setVfoB()
 - setVfoAB()
 - setVfoBA()
+- setTx()
+- setRx()
+- setActiveRig(index)
 
 
 73,<br>
