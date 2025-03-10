@@ -57,6 +57,9 @@ class OmniRigWrapper():
     VFO_BB = 512
     VFO_BA = 1024
     
+    #Tx
+    TX_OFF = 2097152
+    TX_ON = 4194304
 
     #c'tor
     def __init__(self):
@@ -171,6 +174,14 @@ class OmniRigWrapper():
             elif index == 2:
                 self._rig = self._rig2
     
+    def setTx(self):
+        time.sleep(self._timeout)
+        self._rig.Tx = self.TX_ON
+    
+    def setRx(self):
+        time.sleep(self._timeout)
+        self._rig.Tx = self.TX_OFF
+
     def setCustomCommand(self, command_string, reply_length, reply_end):
         time.sleep(self._timeout)
         self._rig.SendCustomCommand(command_string, reply_length, reply_end)
@@ -289,6 +300,11 @@ if __name__ == "__main__":
     #set frequency of VFO A to 18.110MHz using the generic set method
     OmniClient.setCustomCommand("FA018110000;", 0, 0)
 
+    #put the radio in TX mode
+    #OmniClient.setTx()
+    #put the radio in RX mode
+    #OmniClient.setRx()
+    
     #here is the full list of methods:
     
     #setFrequency(vfo_selector, frequency)
@@ -349,3 +365,4 @@ if __name__ == "__main__":
     print(WriteableParams)
     Xit = OmniClient.getParam("Xit")
     print(Xit)
+    
