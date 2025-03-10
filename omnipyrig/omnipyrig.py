@@ -58,8 +58,8 @@ class OmniRigWrapper():
     VFO_BA = 1024
     
     #Tx
-    TX_OFF = 2097152
-    TX_ON = 4194304
+    TX_OFF = 0x00200000
+    TX_ON = 0x00400000
 
     #c'tor
     def __init__(self):
