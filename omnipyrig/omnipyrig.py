@@ -8,7 +8,7 @@ class OmniRigWrapper():
     _rig = None
     _rig1 = None
     _rig2 = None
-    _timeout = 0.5
+    _timeout = 0
 
     #on/off enumeration
     OFF = 0
@@ -252,7 +252,6 @@ class OmniRigWrapper():
         elif param =='Vfo': return self._rig.Vfo
         elif param =='WriteableParams': return self._rig.WriteableParams
         elif param =='Xit': return self._rig.Xit
-        time.sleep(self._timeout)
 
     def safe_int(self, input_data):
         if isinstance(input_data, str):
@@ -282,6 +281,9 @@ if __name__ == "__main__":
     OmniClient.setActiveRig(2)
     RigType = OmniClient.getParam("RigType")
     print(f'Rig 2: {RigType}')
+
+    #set the active rig to 1 (as defined in OmniRig GUI)
+    OmniClient.setActiveRig(1)
 
     #There are 3 ways to send set commands
     #1. using the explicit methods
@@ -319,7 +321,7 @@ if __name__ == "__main__":
     #setVfoAB()
     #setVfoBA()
     #setActiveRig(index)
-
+         
     #get and print some parameters from the radio
     StatusStr = OmniClient.getParam("StatusStr")
     print(StatusStr)
